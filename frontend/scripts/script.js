@@ -518,6 +518,8 @@ function getAuthToken() {
 function clearAuthSession() {
   localStorage.removeItem(PF_TOKEN_KEY);
   localStorage.removeItem(PF_USER_KEY);
+  sessionStorage.removeItem(PF_TOKEN_KEY);
+  sessionStorage.removeItem(PF_USER_KEY);
 }
 
 async function apiRequest(path, options = {}) {
@@ -1053,10 +1055,17 @@ async function initDashboardSession() {
   const logoutButton = document.getElementById('logoutButton');
   const headerType = document.getElementById('dashboardTypeLabel');
   const storedUser = getStoredUser();
+  const authToken = getAuthToken();
   const preferredLink = localStorage.getItem(PF_LINK_KEY) || 'yourname';
   const selectedProduct = localStorage.getItem(PF_PRODUCT_KEY) || 'webpage';
 
   if (!sidebarName || !sidebarHandle || !sidebarAvatar) return;
+
+  if (!storedUser?.uid || !authToken) {
+    clearAuthSession();
+    window.location.replace('index.html');
+    return;
+  }
 
   if (storedUser?.name) {
     sidebarName.textContent = storedUser.name;
@@ -1086,7 +1095,7 @@ async function initDashboardSession() {
         clearAuthSession();
         showToast('Signed out');
         setTimeout(() => {
-          window.location.href = 'auth.html';
+          window.location.href = 'index.html';
         }, 250);
       };
 

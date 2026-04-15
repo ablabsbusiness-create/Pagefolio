@@ -199,9 +199,17 @@ const renderAdvDassWebsite = (templateHtml, payload) => {
   const heroDescription = escapeHtml(websiteDetails.heroDescription || "");
   const yearsExperience = escapeHtml(websiteDetails.yearsExperience || "");
   const aboutSection = escapeHtml(websiteDetails.aboutSection || "");
+  const advocatePhoto = String(
+    websiteDetails.advocatePhoto ||
+    "https://via.placeholder.com/900x1100?text=Advocate+Photo"
+  ).trim();
   const consultationCopy = escapeHtml(contact.consultationCopy || "");
   const officeAddress = escapeHtml(contact.officeAddress || "").replace(/\r?\n/g, "<br>");
   const officeHours = escapeHtml(contact.officeHours || "").replace(/\r?\n/g, "<br>");
+  const googleMapLink = String(
+    contact.googleMapLink ||
+    "https://www.google.com/maps?q=India&z=4&output=embed"
+  ).trim();
   const phoneNumbers = [contact.primaryPhone, contact.whatsappNumber]
     .filter(Boolean)
     .map((entry) => escapeHtml(entry))
@@ -253,6 +261,9 @@ const renderAdvDassWebsite = (templateHtml, payload) => {
   html = replaceElementContentById(html, "liveServicesGrid", servicesMarkup);
   html = replaceElementContentById(html, "liveTestimonialsSlider", testimonialsMarkup);
   html = replaceElementContentById(html, "liveFaqList", faqMarkup);
+  html = replaceAttributeById(html, "liveTeamPhoto", "src", advocatePhoto);
+  html = replaceAttributeById(html, "liveTeamPhoto", "alt", professionalName || "Advocate photo");
+  html = replaceAttributeById(html, "liveOfficeMap", "src", googleMapLink);
   html = replaceAttributeById(html, "liveWhatsappLink", "href", whatsappHref);
 
   if (websiteDetails.primaryCtaLabel) {

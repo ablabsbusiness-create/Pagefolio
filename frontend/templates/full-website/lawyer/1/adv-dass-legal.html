@@ -1685,6 +1685,7 @@ ul { list-style: none; }
         </div>
         <div class="contact-map">
           <iframe
+            id="liveOfficeMap"
             src="https://www.google.com/maps?q=India&z=4&output=embed"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -2195,6 +2196,17 @@ function applyLiveDashboardData(data = {}) {
   setHtml('liveOfficeHours', (contact.officeHours || '').replace(/\n/g, '<br>'));
   setText('liveFooterAddress', contact.officeAddress);
   setText('liveFooterAbout', websiteDetails.aboutSection || contact.consultationCopy);
+
+  const teamPhoto = document.getElementById('liveTeamPhoto');
+  if (teamPhoto && websiteDetails.advocatePhoto) {
+    teamPhoto.src = websiteDetails.advocatePhoto;
+    teamPhoto.alt = websiteDetails.professionalName || 'Advocate photo';
+  }
+
+  const officeMap = document.getElementById('liveOfficeMap');
+  if (officeMap && contact.googleMapLink) {
+    officeMap.src = contact.googleMapLink;
+  }
 
   const whatsappLink = document.getElementById('liveWhatsappLink');
   if (whatsappLink && contact.whatsappNumber) {
