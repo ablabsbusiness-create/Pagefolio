@@ -345,6 +345,76 @@
       word-break: break-all;
     }
 
+    .pricing-wait-card {
+      display: grid;
+      gap: 16px;
+      margin: 22px auto 0;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,1));
+      box-shadow: var(--shadow-lg);
+    }
+
+    [data-theme="dark"] .pricing-wait-card {
+      background:
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.16), transparent 34%),
+        linear-gradient(180deg, rgba(24,24,24,0.96), rgba(24,24,24,1));
+    }
+
+    .pricing-wait-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .pricing-wait-copy p {
+      margin: 10px 0 0;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .pricing-wait-pulse {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-2), #f472b6);
+      box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.28);
+      animation: pricingPulse 1.8s ease-out infinite;
+      flex: 0 0 auto;
+      margin-top: 6px;
+    }
+
+    .pricing-wait-status {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .pricing-wait-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @keyframes pricingPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.28);
+      }
+      70% {
+        box-shadow: 0 0 0 12px rgba(139, 92, 246, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+      }
+    }
+
     @media (max-width: 860px) {
       .payment-grid {
         grid-template-columns: 1fr;
@@ -372,7 +442,9 @@
 
       .pricing-setup-row,
       .pricing-setup-actions,
-      .pricing-live-note {
+      .pricing-live-note,
+      .pricing-wait-head,
+      .pricing-wait-actions {
         flex-direction: column;
         align-items: stretch;
       }
@@ -381,7 +453,17 @@
         width: 100%;
       }
 
+      .pricing-wait-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
       .pricing-setup-banner {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .pricing-wait-card {
         padding: 20px;
         border-radius: 24px;
       }
@@ -532,6 +614,24 @@
           </div>
         </div>
         <div class="pricing-setup-url" id="pricingSetupUrl"></div>
+      </div>
+
+      <div class="pricing-wait-card" id="pricingWaitCard" hidden>
+        <div class="pricing-wait-head">
+          <div class="pricing-wait-copy">
+            <span class="eyebrow">Please Wait</span>
+            <h2 style="margin:12px 0 8px;">We will take you to your dashboard in a sec</h2>
+            <p>Your website is still being published. Keep this page open and we will move you automatically the moment it goes live.</p>
+          </div>
+          <div class="pricing-wait-pulse" aria-hidden="true"></div>
+        </div>
+        <div class="pricing-wait-status" id="pricingWaitStatus">
+          Doing the magic behind the curtain...
+        </div>
+        <div class="pricing-wait-actions">
+          <button class="btn btn-primary" type="button" id="pricingWaitContinueButton">Keep waiting</button>
+          <button class="btn btn-secondary" type="button" id="pricingWaitHideButton">Back to pricing</button>
+        </div>
       </div>
     </div>
   </section>

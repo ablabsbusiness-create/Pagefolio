@@ -1522,6 +1522,10 @@ function initPricingPublishFlow() {
   const overlayStatus = document.getElementById('pricingLoaderStatus');
   const overlayHint = document.getElementById('pricingLoaderHint');
   const openButton = document.getElementById('pricingOpenDashboardButton');
+  const waitCard = document.getElementById('pricingWaitCard');
+  const waitStatus = document.getElementById('pricingWaitStatus');
+  const waitContinueButton = document.getElementById('pricingWaitContinueButton');
+  const waitHideButton = document.getElementById('pricingWaitHideButton');
 
   if (!state?.dashboardUrl) return;
 
@@ -1552,6 +1556,9 @@ function initPricingPublishFlow() {
     if (overlayStatus) {
       overlayStatus.textContent = message;
     }
+    if (waitStatus) {
+      waitStatus.textContent = message;
+    }
   };
 
   const setOverlayVisible = (visible) => {
@@ -1559,6 +1566,11 @@ function initPricingPublishFlow() {
     overlay.hidden = !visible;
     document.body.classList.toggle('pricing-loading', visible);
     overlayActive = visible;
+  };
+
+  const setWaitCardVisible = (visible) => {
+    if (!waitCard) return;
+    waitCard.hidden = !visible;
   };
 
   const openDashboard = () => {
@@ -1584,6 +1596,7 @@ function initPricingPublishFlow() {
     if (pollTimer) clearInterval(pollTimer);
     if (messageTimer) clearInterval(messageTimer);
     if (autoOverlayTimer) clearTimeout(autoOverlayTimer);
+    setWaitCardVisible(false);
     if (statusText) {
       statusText.textContent = 'Your dashboard is live. Opening it now...';
     }
@@ -1626,14 +1639,37 @@ function initPricingPublishFlow() {
     }
   };
 
-  skipButton?.addEventListener('click', () => {
+  const handleSkipAttempt = async () => {
+    const ready = await checkDashboardReady();
+    if (ready) {
+      handleReady();
+      return;
+    }
+
+    if (statusText) {
+      statusText.textContent = 'Please wait. We will take you to your dashboard in a sec.';
+    }
+    setWaitCardVisible(true);
     startOverlay();
     pollUntilReady();
+  };
+
+  skipButton?.addEventListener('click', () => {
+    handleSkipAttempt();
   });
 
   waitButton?.addEventListener('click', () => {
     startOverlay();
     pollUntilReady();
+  });
+
+  waitContinueButton?.addEventListener('click', () => {
+    startOverlay();
+    pollUntilReady();
+  });
+
+  waitHideButton?.addEventListener('click', () => {
+    setWaitCardVisible(false);
   });
 
   openButton?.addEventListener('click', () => {
