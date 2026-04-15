@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing - Pagefolio</title>
+  <meta name="firebase-api-key" content="AIzaSyDr3qHEZuz4Xzz8x6a7IzRdfbpdS3xlreE" />
+  <meta name="firebase-auth-domain" content="pagafolio.firebaseapp.com" />
+  <meta name="firebase-project-id" content="pagafolio" />
+  <meta name="firebase-app-id" content="1:480870775548:web:ad001ea8c902b733bc7579" />
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/index.css" />
+  <style>
+    .pricing-page-shell {
+      padding-top: calc(var(--nav-height) + 44px);
+      padding-bottom: 88px;
+    }
+
+    .pricing-hero {
+      max-width: 920px;
+      margin: 0 auto 40px;
+      padding: 36px;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.14), transparent 32%),
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,1));
+      box-shadow: var(--shadow-xl);
+    }
+
+    [data-theme="dark"] .pricing-hero {
+      background:
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.16), transparent 32%),
+        linear-gradient(180deg, rgba(24,24,24,0.96), rgba(24,24,24,1));
+    }
+
+    .pricing-hero .section-header {
+      margin-bottom: 0;
+    }
+
+    .pricing-live-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    .pricing-live-note .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 8px rgba(52, 211, 153, 0.12);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .pricing-card {
+      position: relative;
+    }
+
+    .pricing-top {
+      margin-bottom: 24px;
+    }
+
+    .pricing-top h3 {
+      margin: 16px 0 8px;
+      font-size: 1.5rem;
+    }
+
+    .price {
+      margin-bottom: 14px;
+      font-family: var(--font-ui);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--text-primary);
+    }
+
+    .price span {
+      margin-left: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      color: var(--text-muted);
+    }
+
+    .pricing-top p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .pricing-features {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .pricing-features li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .pricing-features li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-2), #f472b6);
+      transform: translateY(-50%);
+    }
+
+    .payment-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+      background: rgba(10, 14, 24, 0.56);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .payment-modal.open {
+      display: flex;
+    }
+
+    .payment-sheet {
+      width: min(640px, 100%);
+      max-height: min(92vh, 900px);
+      overflow: auto;
+      padding: 24px;
+      margin: auto 0;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.94);
+      box-shadow: var(--shadow-xl);
+      scrollbar-gutter: stable;
+    }
+
+    [data-theme="dark"] .payment-sheet {
+      background: rgba(24,24,24,0.96);
+    }
+
+    .payment-sheet::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .payment-sheet::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 999px;
+      margin: 12px 0;
+    }
+
+    .payment-sheet::-webkit-scrollbar-thumb {
+      background: rgba(120, 120, 120, 0.5);
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .payment-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .payment-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+
+    .payment-subtitle {
+      color: var(--text-secondary);
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .payment-qr-card,
+    .payment-form-card {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+
+    .payment-qr {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .payment-qr-note {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .upi-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .upi-chip span {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .upi-chip .btn {
+      width: auto;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .payment-fields {
+      display: grid;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .payment-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .payment-note {
+      margin-top: 14px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .payment-success {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(52, 211, 153, 0.28);
+      background: rgba(52, 211, 153, 0.12);
+      color: #047857;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .payment-success.show {
+      display: block;
+    }
+
+    @media (max-width: 860px) {
+      .payment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .payment-qr-card,
+      .payment-form-card {
+        padding: 16px;
+      }
+
+      .upi-chip {
+        flex-wrap: nowrap;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-hero,
+      .pricing-card {
+        padding: 22px;
+      }
+
+      .pricing-live-note {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .payment-sheet {
+        padding: 18px;
+        border-radius: 24px;
+      }
+
+      .payment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .payment-head {
+        gap: 10px;
+      }
+
+      .payment-head h2 {
+        margin-top: 10px !important;
+        font-size: 1.6rem;
+        line-height: 1.1;
+      }
+
+      .payment-actions .btn,
+      .upi-chip .btn {
+        width: auto;
+      }
+
+      .upi-chip {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .payment-modal {
+        padding: 10px;
+      }
+
+      .payment-sheet {
+        padding: 16px;
+      }
+
+      .payment-head {
+        align-items: center;
+      }
+
+      .payment-head h2 {
+        font-size: 1.4rem;
+      }
+
+      .payment-close {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-dot"></div>
+        Pagefolio
+      </a>
+      <div class="nav-links">
+        <a href="explore.html" class="nav-link">Explore</a>
+        <a href="Pricing-page.html" class="nav-link active">Pricing</a>
+        <a href="profile.html" class="nav-link">Demo</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Theme</button>
+        <a href="auth.html" class="btn btn-ghost btn-sm">Sign in</a>
+        <a href="auth.html" class="btn btn-primary btn-sm">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="pricing-page-shell">
+    <div class="container" style="max-width:1000px;">
+      <div class="pricing-hero reveal visible">
+        <div class="section-header reveal visible">
+          <span class="eyebrow">Pricing</span>
+          <h1 style="margin-top:16px;">Simple plans for getting your page live</h1>
+          <p>Pick the setup that matches where you are right now. You can start free and upgrade later when you need more themes, links, or team support.</p>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pt-card pricing-card reveal visible">
+          <div class="pricing-top">
+            <span class="badge badge-green">Free</span>
+            <h3>Starter</h3>
+            <div class="price">Rs 0<span>/forever</span></div>
+            <p>Perfect for getting your first Pagefolio website online quickly.</p>
+          </div>
+          <ul class="pricing-features">
+            <li>1 page or website setup</li>
+            <li>Basic themes</li>
+            <li>Core links and profile details</li>
+            <li>Google sign-in</li>
+          </ul>
+          <a href="auth.html" class="btn btn-secondary" style="width:100%; justify-content:center;">Start free</a>
+        </div>
+
+        <div class="pt-card featured pricing-card reveal visible">
+          <span class="pt-badge">Most loved</span>
+          <div class="pricing-top">
+            <span class="badge badge-gold">Popular</span>
+            <h3>Pro</h3>
+            <div class="price">Rs 499<span>/month</span></div>
+            <p>Best for professionals who want more polish, flexibility, and better conversion tools.</p>
+          </div>
+          <ul class="pricing-features">
+            <li>Premium themes</li>
+            <li>More links and sections</li>
+            <li>Advanced profile customization</li>
+            <li>Priority support</li>
+          </ul>
+          <button class="btn btn-gold" type="button" id="openPaymentModal" style="width:100%; justify-content:center;">Pay now</button>
+        </div>
+      </div>
+
+      <div class="ad-slot ad-slot-inline reveal visible">
+        <div class="ad-slot-inner">
+          <div class="ad-slot-meta">
+            <span class="ad-slot-label">Ad placeholder</span>
+            <span class="ad-slot-tier">Pricing</span>
+          </div>
+          <h3>Reserved sponsor space</h3>
+          <p>This placeholder can be used for a soft sponsor mention or partner offer on the public pricing page.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="payment-modal" id="paymentModal" aria-hidden="true">
+    <div class="payment-sheet">
+      <div class="payment-head">
+        <div>
+          <span class="eyebrow">Payment</span>
+          <h2 style="margin-top:12px;">Complete your Pro payment</h2>
+          <p class="payment-subtitle">Scan the QR or pay directly to the UPI ID below, then fill in your name and transaction ID so you can be verified.</p>
+        </div>
+        <button class="payment-close" type="button" id="closePaymentModal" aria-label="Close payment dialog">×</button>
+      </div>
+
+      <div class="payment-grid">
+        <div class="payment-qr-card">
+          <img
+            class="payment-qr"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=upi%3A%2F%2Fpay%3Fpa%3D7357397888%40fam%26pn%3DPagefolio%26am%3D499%26cu%3DINR"
+            alt="UPI QR code for Pagefolio Pro payment"
+          />
+          <p class="payment-qr-note">Amount: Rs 499. Open any UPI app and scan to pay.</p>
+          <div class="upi-chip">
+            <span id="upiIdText">7357397888@fam</span>
+            <button class="btn btn-ghost btn-sm" type="button" id="copyUpiButton">Copy</button>
+          </div>
+        </div>
+
+        <div class="payment-form-card">
+          <div class="payment-fields">
+            <div class="input-group">
+              <label class="input-label" for="paymentName">Name</label>
+              <input class="input-field" id="paymentName" type="text" placeholder="Your full name" />
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="paymentTxnId">Transaction ID</label>
+              <input class="input-field" id="paymentTxnId" type="text" placeholder="Enter your UPI transaction ID" />
+            </div>
+          </div>
+
+          <div class="payment-actions">
+            <a class="btn btn-secondary" href="upi://pay?pa=7357397888@fam&pn=Pagefolio&am=499&cu=INR">Open UPI app</a>
+            <button class="btn btn-primary" type="button" id="submitPaymentDetails">Submit details</button>
+          </div>
+
+          <div class="payment-success" id="paymentSuccessMessage">
+            Thanks. Your payment details were submitted successfully.
+          </div>
+
+          <p class="payment-note">Please use the same name you want associated with the payment. The transaction ID is required so the payment can be matched correctly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="../scripts/runtime-config.js"></script>
+  <script src="../scripts/script.js"></script>
+  <script>
+    (function () {
+      const modal = document.getElementById('paymentModal');
+      const openButton = document.getElementById('openPaymentModal');
+      const closeButton = document.getElementById('closePaymentModal');
+      const copyButton = document.getElementById('copyUpiButton');
+      const submitButton = document.getElementById('submitPaymentDetails');
+      const nameInput = document.getElementById('paymentName');
+      const txnInput = document.getElementById('paymentTxnId');
+      const successMessage = document.getElementById('paymentSuccessMessage');
+      const upiId = '7357397888@fam';
+
+      if (!modal || !openButton) return;
+
+      function openModal() {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+
+      openButton.addEventListener('click', openModal);
+      closeButton?.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('open')) {
+          closeModal();
+        }
+      });
+
+      copyButton?.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(upiId);
+          copyButton.textContent = 'Copied';
+          setTimeout(() => {
+            copyButton.textContent = 'Copy';
+          }, 1200);
+        } catch (error) {
+          copyButton.textContent = 'Copy';
+        }
+      });
+
+      submitButton?.addEventListener('click', async () => {
+        const name = nameInput?.value.trim();
+        const txnId = txnInput?.value.trim();
+
+        if (!name || !txnId) {
+          alert('Please enter both your name and transaction ID.');
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+
+        try {
+          await saveFirebasePaymentRecord({
+            name,
+            transactionId: txnId,
+            upiId,
+            amount: 499,
+            currency: 'INR',
+            plan: 'Pro',
+            sourcePage: 'Pricing-page.html'
+          });
+
+          successMessage?.classList.add('show');
+        } catch (error) {
+          alert(error?.message || 'Could not submit payment details.');
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Submit details';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

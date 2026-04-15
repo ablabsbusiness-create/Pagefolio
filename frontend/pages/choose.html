@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Your Setup - Pagefolio</title>
+  <meta name="firebase-api-key" content="AIzaSyDr3qHEZuz4Xzz8x6a7IzRdfbpdS3xlreE" />
+  <meta name="firebase-auth-domain" content="pagafolio.firebaseapp.com" />
+  <meta name="firebase-project-id" content="pagafolio" />
+  <meta name="firebase-app-id" content="1:480870775548:web:ad001ea8c902b733bc7579" />
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/choose.css" />
+</head>
+<body class="choose-body">
+  <div class="choose-shell">
+    <div class="choose-topbar">
+      <a href="auth.html" class="btn btn-ghost btn-sm">Back</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Theme</button>
+    </div>
+
+    <div class="choose-card">
+      <span class="badge badge-gold">Step 1 of 2</span>
+      <h1>What do you want to create?</h1>
+      <p class="choose-subtitle">Choose the experience you want first. Next, we’ll take you to Explore so you can pick the design that fits.</p>
+
+      <div class="choose-options" id="chooseOptions">
+        <button class="choose-option active" type="button" data-product="website">
+          <span class="choose-option-kicker">Full Website</span>
+          <strong>Build a complete website</strong>
+          <p>Use sections like Home, About, Services, Testimonials, and Contact.</p>
+        </button>
+        <button class="choose-option choose-option-disabled" type="button" data-product="webpage" aria-disabled="true">
+          <span class="choose-option-kicker">Simple Webpage</span>
+          <strong>Build a single-page profile</strong>
+          <p>Perfect for a fast personal page with links, bio, services, and contact info.</p>
+          <span class="choose-option-overlay-text">Coming Soon — Why be simple?</span>
+        </button>
+      </div>
+
+      <div class="choose-form">
+        <div class="input-group">
+          <label class="input-label" for="choosePhone">Phone number</label>
+          <input id="choosePhone" class="input-field" type="tel" placeholder="+91 99999 99999" />
+          <p class="choose-hint">We use this to help you connect with visitors from your site.</p>
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="preferredLink">Preferred link</label>
+          <div class="choose-link-wrap">
+            <span class="choose-link-prefix">ablabsbusiness-create.github.io/Pagefolio/</span>
+            <input id="preferredLink" class="input-field choose-link-input" type="text" placeholder="yourname" value="yourname" />
+          </div>
+          <div class="username-status" id="preferredLinkStatus"></div>
+          <p class="choose-hint">You can change this later. For now, this helps us tailor the next step.</p>
+        </div>
+      </div>
+
+      <div class="choose-actions">
+        <button class="btn btn-primary btn-lg" type="button" id="continueChoice">Continue to Explore</button>
+      </div>
+
+      <div class="ad-slot ad-slot-inline">
+        <div class="ad-slot-inner">
+          <div class="ad-slot-meta">
+            <span class="ad-slot-label">Ad placeholder</span>
+            <span class="ad-slot-tier">Choose page</span>
+          </div>
+          <h3>Reserved sponsor space</h3>
+          <p>This placeholder can later hold a sponsored block or promotional message without changing the core choose flow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="../scripts/runtime-config.js"></script>
+  <script src="../scripts/script.js"></script>
+</body>
+</html>
+
+

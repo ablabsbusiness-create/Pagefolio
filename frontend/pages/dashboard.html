@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Website Dashboard - Pagefolio</title>
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/dashboard.css" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <a href="index.html" class="nav-logo sidebar-logo">
+        <div class="nav-logo-dot"></div>
+        Pagefolio
+      </a>
+
+      <nav class="sidebar-nav">
+        <a href="#overviewSection" class="sidebar-link active" data-section="overview">
+          <span class="sidebar-icon">Home</span>
+          <span>Overview</span>
+        </a>
+        <a href="#profileSection" class="sidebar-link" data-section="profile">
+          <span class="sidebar-icon">Edit</span>
+          <span>Profile</span>
+        </a>
+        <a href="#linksSection" class="sidebar-link" data-section="links">
+          <span class="sidebar-icon">Links</span>
+          <span>Buttons</span>
+        </a>
+        <a href="#themeSection" class="sidebar-link" data-section="theme">
+          <span class="sidebar-icon">Style</span>
+          <span>Theme</span>
+        </a>
+        <a href="#settingsSection" class="sidebar-link" data-section="settings">
+          <span class="sidebar-icon">Gear</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-plan-badge">
+        <span id="dashboardTypeLabel">Simple Website</span>
+        <button class="btn btn-gold btn-sm" type="button" data-ui-action="upgrade">Upgrade</button>
+      </div>
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebarAvatar">PF</div>
+        <div class="sidebar-user-info">
+          <span class="sidebar-user-name" id="sidebarUserName">Pagefolio User</span>
+          <span class="sidebar-user-handle" id="sidebarUserHandle">@yourname</span>
+        </div>
+        <button class="sidebar-logout" id="logoutButton" title="Sign out" type="button">Exit</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="dashboard-main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">Menu</button>
+        <div class="topbar-title" id="topbarTitle">Simple Website Dashboard</div>
+      </div>
+      <div class="topbar-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Theme</button>
+        <button class="btn btn-secondary btn-sm" data-copy-link id="copyProfileButton" type="button">Copy website link</button>
+        <button class="btn btn-primary btn-sm" type="button" data-ui-action="preview-live">View live page</button>
+      </div>
+    </header>
+
+    <div class="dashboard-content">
+      <section class="dashboard-section" id="overviewSection">
+        <div class="completeness-bar">
+          <div class="completeness-info">
+            <span class="completeness-label">Simple page setup</span>
+            <span class="completeness-pct">65%</span>
+          </div>
+          <div class="completeness-track">
+            <div class="completeness-fill" style="width:65%"></div>
+          </div>
+          <div class="completeness-missing">
+            Missing: <span>headline</span>, <span>main CTA</span>, <span>contact button</span>.
+            <button type="button" class="btn btn-ghost btn-sm" data-ui-action="complete-profile">Finish setup</button>
+          </div>
+        </div>
+
+        <div class="quick-actions-row">
+          <div class="quick-action-card">
+            <div class="quick-action-icon" style="background:#EEF2FF; color:#4F46E5;">Hero</div>
+            <div class="quick-action-copy">
+              <strong>Tighten your first line</strong>
+              <span>Make your intro clear in one sentence so visitors instantly know who you are.</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" type="button" data-ui-action="edit-headline">Edit</button>
+          </div>
+          <div class="quick-action-card">
+            <div class="quick-action-icon" style="background:#DCFCE7; color:#166534;">CTA</div>
+            <div class="quick-action-copy">
+              <strong>Pick one main action</strong>
+              <span>Add one strong button like WhatsApp, call, booking, or portfolio.</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" type="button" data-ui-action="focus-links">Add button</button>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-card-icon" style="background:#EEF2FF; color:#4F46E5;">View</div>
+            <div class="stat-card-info">
+              <div class="stat-card-value" data-counter="284" data-suffix="">0</div>
+              <div class="stat-card-label">Page views</div>
+              <div class="stat-card-change positive">+9% this week</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon" style="background:#DCFCE7; color:#166534;">Tap</div>
+            <div class="stat-card-info">
+              <div class="stat-card-value" data-counter="76" data-suffix="">0</div>
+              <div class="stat-card-label">Button clicks</div>
+              <div class="stat-card-change positive">+14% this week</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon" style="background:#FEF3C7; color:#D97706;">Msg</div>
+            <div class="stat-card-info">
+              <div class="stat-card-value" data-counter="19" data-suffix="">0</div>
+              <div class="stat-card-label">Contact starts</div>
+              <div class="stat-card-change positive">+4% this week</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon" style="background:#F3E8FF; color:#7C3AED;">Done</div>
+            <div class="stat-card-info">
+              <div class="stat-card-value" data-counter="3" data-suffix="/5">0</div>
+              <div class="stat-card-label">Core sections ready</div>
+              <div class="stat-card-change negative">2 left to finish</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ad-slot ad-slot-inline">
+          <div class="ad-slot-inner">
+            <div class="ad-slot-meta">
+              <span class="ad-slot-label">Ad placeholder</span>
+              <span class="ad-slot-tier">Dashboard</span>
+            </div>
+            <h3>Reserved sponsor space</h3>
+            <p>This placeholder can be used for a promotion, partner tool, or upgrade placement inside the dashboard.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="dashboard-grid">
+        <section class="dash-card profile-edit-card dashboard-section" id="profileSection">
+          <div class="dash-card-header">
+            <h3>Simple Page Content</h3>
+            <button class="btn btn-ghost btn-sm" type="button" data-ui-action="preview-card">Preview</button>
+          </div>
+
+          <div class="profile-preview-mini">
+            <div class="ppm-cover" style="background:linear-gradient(135deg,#0f172a,#4f46e5);"></div>
+            <div class="ppm-body">
+              <div class="ppm-photo-wrap">
+                <div class="ppm-photo-ring">
+                  <div class="ppm-photo">PF</div>
+                </div>
+              </div>
+              <div class="ppm-name">Your name or brand</div>
+              <div class="ppm-title">One-line intro for your simple website</div>
+            </div>
+          </div>
+
+          <div class="edit-fields">
+            <div class="input-group">
+              <label class="input-label">Display name</label>
+              <input type="text" class="input-field" value="Your name or brand" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">Headline</label>
+              <input type="text" class="input-field" value="What you do in one clear line" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">Short bio</label>
+              <textarea class="input-field" rows="3" style="resize:vertical;">Write a short intro, what you offer, and how people should contact you.</textarea>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Primary CTA label</label>
+              <input type="text" class="input-field" value="Book now" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">Primary CTA link</label>
+              <input type="text" class="input-field" value="https://wa.me/910000000000" />
+            </div>
+          </div>
+
+          <button class="btn btn-primary dashboard-save-button" type="button" onclick="saveProfile('Simple website content saved in UI mode')">Save changes</button>
+        </section>
+
+        <div class="dashboard-stack">
+          <section class="dash-card dashboard-section" id="linksSection">
+            <div class="dash-card-header">
+              <h3>Action Buttons</h3>
+              <button class="btn btn-ghost btn-sm" type="button" onclick="addLink()">+ Add button</button>
+            </div>
+            <div class="links-list" id="linksList">
+              <div class="link-item" draggable="true">
+                <div class="link-drag">Drag</div>
+                <div class="link-icon whatsapp">W</div>
+                <div class="link-info">
+                  <input class="link-title-input" value="WhatsApp" />
+                  <input class="link-url-input" value="wa.me/910000000000" />
+                </div>
+                <div class="link-actions">
+                  <div class="link-toggle active" onclick="this.classList.toggle('active')"></div>
+                  <button class="link-delete" onclick="this.closest('.link-item').remove()">X</button>
+                </div>
+              </div>
+              <div class="link-item" draggable="true">
+                <div class="link-drag">Drag</div>
+                <div class="link-icon globe">C</div>
+                <div class="link-info">
+                  <input class="link-title-input" value="Call now" />
+                  <input class="link-url-input" value="tel:+919999999999" />
+                </div>
+                <div class="link-actions">
+                  <div class="link-toggle active" onclick="this.classList.toggle('active')"></div>
+                  <button class="link-delete" onclick="this.closest('.link-item').remove()">X</button>
+                </div>
+              </div>
+              <div class="link-item" draggable="true">
+                <div class="link-drag">Drag</div>
+                <div class="link-icon youtube">P</div>
+                <div class="link-info">
+                  <input class="link-title-input" value="Portfolio" />
+                  <input class="link-url-input" value="https://example.com" />
+                </div>
+                <div class="link-actions">
+                  <div class="link-toggle" onclick="this.classList.toggle('active')"></div>
+                  <button class="link-delete" onclick="this.closest('.link-item').remove()">X</button>
+                </div>
+              </div>
+            </div>
+            <p class="links-count">Use 3 to 5 buttons so the page stays clear and focused.</p>
+          </section>
+
+          <section class="dash-card dashboard-section" id="themeSection">
+            <div class="dash-card-header">
+              <h3>Simple Page Theme</h3>
+              <span class="badge badge-gold">Quick styling</span>
+            </div>
+            <div class="themes-grid">
+              <div class="theme-option active" title="Navy Violet">
+                <div class="theme-preview" style="background:linear-gradient(135deg,#24123a,#8b5cf6)"></div>
+                <span>Navy Violet</span>
+                <div class="theme-check">OK</div>
+              </div>
+              <div class="theme-option" title="Minimal">
+                <div class="theme-preview" style="background:linear-gradient(135deg,#F8F7F4,#E2E2E2)"></div>
+                <span>Minimal</span>
+              </div>
+              <div class="theme-option" title="Ocean">
+                <div class="theme-preview" style="background:linear-gradient(135deg,#0C4A6E,#38BDF8)"></div>
+                <span>Ocean</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="dash-card dashboard-section" id="settingsSection">
+            <div class="dash-card-header">
+              <h3>Publishing Settings</h3>
+              <span class="badge badge-blue">Simple site</span>
+            </div>
+            <div class="edit-fields">
+              <div class="input-group">
+                <label class="input-label">Preferred link</label>
+                <input type="text" class="input-field" id="simplePreferredLinkInput" value="ablabsbusiness-create.github.io/Pagefolio/yourname" readonly />
+              </div>
+              <div class="input-group">
+                <label class="input-label">Page visibility</label>
+                <button class="btn btn-secondary btn-sm" type="button" data-ui-action="visibility">Public</button>
+              </div>
+              <div class="input-group">
+                <label class="input-label">Contact prompt</label>
+                <button class="btn btn-secondary btn-sm" type="button" data-ui-action="notifications">Enabled</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showToast(message, duration = 3000) {
+      let toast = document.querySelector('.toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+      }
+
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), duration);
+    }
+
+    async function copyToClipboard(text, successMessage = 'Copied!') {
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+        }
+        showToast(successMessage);
+      } catch (error) {
+        showToast('Could not copy link');
+      }
+    }
+
+    function initTheme() {
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const savedTheme = localStorage.getItem('pf-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const nextTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+      html.setAttribute('data-theme', nextTheme);
+      if (themeToggle) {
+        themeToggle.textContent = nextTheme === 'dark' ? 'Theme: Light' : 'Theme: Dark';
+        themeToggle.addEventListener('click', () => {
+          const current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          const updated = current === 'dark' ? 'light' : 'dark';
+          html.setAttribute('data-theme', updated);
+          localStorage.setItem('pf-theme', updated);
+          themeToggle.textContent = updated === 'dark' ? 'Theme: Light' : 'Theme: Dark';
+          showToast('Theme updated');
+        });
+      }
+    }
+
+    function animateCounter(element, target, duration = 1400) {
+      const start = performance.now();
+
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        element.textContent = `${Math.floor(target * progress).toLocaleString()}${element.dataset.suffix || ''}`;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    function initCounters() {
+      document.querySelectorAll('[data-counter]').forEach((element) => {
+        animateCounter(element, parseInt(element.dataset.counter, 10) || 0);
+      });
+    }
+
+    function initDashboardIdentity() {
+      const storedName = localStorage.getItem('pf-ui-name') || 'Pagefolio User';
+      const preferredLink = localStorage.getItem('pf-preferred-link') || 'yourname';
+      const selectedProduct = localStorage.getItem('pf-product-choice') || 'website';
+      const sidebarName = document.getElementById('sidebarUserName');
+      const sidebarHandle = document.getElementById('sidebarUserHandle');
+      const sidebarAvatar = document.getElementById('sidebarAvatar');
+      const dashboardTypeLabel = document.getElementById('dashboardTypeLabel');
+      const copyProfileButton = document.getElementById('copyProfileButton');
+
+      if (sidebarName) {
+        sidebarName.textContent = storedName;
+      }
+
+      if (sidebarHandle) {
+        sidebarHandle.textContent = `@${preferredLink}`;
+      }
+
+      if (sidebarAvatar) {
+        sidebarAvatar.textContent = storedName
+          .split(' ')
+          .slice(0, 2)
+          .map((part) => part[0]?.toUpperCase() || '')
+          .join('')
+          .slice(0, 2) || 'PF';
+      }
+
+      if (dashboardTypeLabel) {
+        dashboardTypeLabel.textContent = selectedProduct === 'website' ? 'Full Website' : 'Simple Website';
+      }
+
+      if (copyProfileButton) {
+        copyProfileButton.addEventListener('click', () => {
+          copyToClipboard(`https://ablabsbusiness-create.github.io/Pagefolio/${preferredLink}`, 'Link copied!');
+        });
+      }
+    }
+
+    function initLogoutButton() {
+      const logoutButton = document.getElementById('logoutButton');
+      logoutButton?.addEventListener('click', () => {
+        localStorage.removeItem('pf-auth-token');
+        localStorage.removeItem('pf-auth-user');
+        showToast('UI session cleared');
+      });
+    }
+
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const topbarTitle = document.getElementById('topbarTitle');
+    const topbarTitles = {
+      overview: 'Simple Website Dashboard',
+      profile: 'Profile',
+      links: 'Action Buttons',
+      theme: 'Simple Page Theme',
+      settings: 'Publishing Settings'
+    };
+
+    sidebarLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        sidebarLinks.forEach((item) => item.classList.remove('active'));
+        link.classList.add('active');
+        topbarTitle.textContent = topbarTitles[link.dataset.section] || 'Dashboard';
+        document.querySelector(link.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    sidebarToggle?.addEventListener('click', () => sidebar.classList.toggle('open'));
+
+    document.querySelectorAll('.theme-option').forEach((option) => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.theme-option').forEach((entry) => {
+          entry.classList.remove('active');
+          entry.querySelector('.theme-check')?.remove();
+        });
+        option.classList.add('active');
+        const check = document.createElement('div');
+        check.className = 'theme-check';
+        check.textContent = 'OK';
+        option.appendChild(check);
+        showToast('Theme updated');
+      });
+    });
+
+    document.querySelectorAll('[data-ui-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const labels = {
+          upgrade: 'Upgrade flow is not connected yet',
+          'preview-live': 'Live preview wiring comes next',
+          'complete-profile': 'Finish the profile section and your buttons',
+          'edit-headline': 'Update your headline in the profile section',
+          'focus-links': 'Scroll down to action buttons',
+          'preview-card': 'Card preview is UI only for now',
+          visibility: 'Visibility updated in UI only mode',
+          notifications: 'Contact prompt updated in UI only mode'
+        };
+        showToast(labels[button.dataset.uiAction] || 'Button interaction works');
+
+        if (button.dataset.uiAction === 'focus-links') {
+          document.getElementById('linksSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        if (button.dataset.uiAction === 'complete-profile') {
+          document.getElementById('profileSection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    function saveProfile(message) {
+      showToast(message || 'Changes saved');
+    }
+
+    function addLink() {
+      const list = document.getElementById('linksList');
+      const item = document.createElement('div');
+      item.className = 'link-item';
+      item.draggable = true;
+      item.innerHTML = `
+        <div class="link-drag">Drag</div>
+        <div class="link-icon globe">New</div>
+        <div class="link-info">
+          <input class="link-title-input" placeholder="Button label" value="New button" />
+          <input class="link-url-input" placeholder="https://..." value="https://example.com" />
+        </div>
+        <div class="link-actions">
+          <div class="link-toggle active" onclick="this.classList.toggle('active')"></div>
+          <button class="link-delete" onclick="this.closest('.link-item').remove()">X</button>
+        </div>
+      `;
+      list.appendChild(item);
+      item.querySelector('.link-title-input').focus();
+      showToast('Button added');
+    }
+
+    window.saveProfile = saveProfile;
+    window.addLink = addLink;
+
+    const simplePreferredLinkInput = document.getElementById('simplePreferredLinkInput');
+    if (simplePreferredLinkInput) {
+      const preferredLink = localStorage.getItem('pf-preferred-link') || 'yourname';
+      simplePreferredLinkInput.value = `ablabsbusiness-create.github.io/Pagefolio/${preferredLink}`;
+    }
+
+    initTheme();
+    initCounters();
+    initDashboardIdentity();
+    initLogoutButton();
+  </script>
+</body>
+</html>

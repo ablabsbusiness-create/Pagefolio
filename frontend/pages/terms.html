@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service - Pagefolio</title>
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <style>
+    .legal-shell {
+      padding: calc(var(--nav-height) + 52px) 0 72px;
+    }
+
+    .legal-card {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 36px;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    [data-theme="dark"] .legal-card {
+      background: rgba(24,24,24,0.88);
+    }
+
+    .legal-meta {
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .legal-sections {
+      display: grid;
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .legal-sections section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legal-sections p,
+    .legal-sections li {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .legal-sections ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .legal-shell {
+        padding-top: calc(var(--nav-height) + 34px);
+      }
+
+      .legal-card {
+        padding: 24px 18px;
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-dot"></div>
+        Pagefolio
+      </a>
+      <div class="nav-links">
+        <a href="explore.html" class="nav-link">Explore</a>
+        <a href="Pricing-page.html" class="nav-link">Pricing</a>
+        <a href="profile.html" class="nav-link">Demo</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Theme</button>
+        <a href="auth.html" class="btn btn-ghost btn-sm">Sign in</a>
+        <a href="auth.html" class="btn btn-primary btn-sm">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="legal-shell">
+    <div class="container">
+      <article class="legal-card">
+        <span class="eyebrow">Legal</span>
+        <h1 style="margin-top:16px;">Terms of Service</h1>
+        <p class="legal-meta">Last updated: April 14, 2026</p>
+
+        <div class="legal-sections">
+          <section>
+            <h2>Using Pagefolio</h2>
+            <p>By using Pagefolio, you agree to use the platform lawfully and responsibly. You may create profile pages, personal websites, and related content only if you have the right to publish that material.</p>
+          </section>
+
+          <section>
+            <h2>Your Account</h2>
+            <p>You are responsible for the accuracy of the information you provide, for keeping access to your account secure, and for activity that happens under your account.</p>
+          </section>
+
+          <section>
+            <h2>Your Content</h2>
+            <p>You keep ownership of the content you submit to Pagefolio. By submitting content, you give Pagefolio permission to host, display, process, and publish that content as needed to operate the service.</p>
+          </section>
+
+          <section>
+            <h2>Prohibited Use</h2>
+            <ul>
+              <li>You may not upload unlawful, misleading, infringing, or abusive content.</li>
+              <li>You may not attempt to break, reverse engineer, or misuse the platform.</li>
+              <li>You may not use Pagefolio to collect data from others without proper notice or permission.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Availability</h2>
+            <p>We may update, suspend, or change parts of the service at any time. We do not guarantee uninterrupted availability.</p>
+          </section>
+
+          <section>
+            <h2>Termination</h2>
+            <p>We may suspend or remove access if these terms are violated or if use of the platform creates risk for Pagefolio or others.</p>
+          </section>
+
+          <section>
+            <h2>Disclaimer</h2>
+            <p>Pagefolio is provided on an as-is and as-available basis. To the extent permitted by law, we disclaim warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+          </section>
+
+          <section>
+            <h2>Contact</h2>
+            <p>If you have questions about these terms, contact the Pagefolio team before using the service for sensitive or regulated information.</p>
+          </section>
+        </div>
+
+        <div class="ad-slot ad-slot-inline">
+          <div class="ad-slot-inner">
+            <div class="ad-slot-meta">
+              <span class="ad-slot-label">Ad placeholder</span>
+              <span class="ad-slot-tier">Terms page</span>
+            </div>
+            <h3>Reserved sponsor space</h3>
+            <p>This placeholder can be used for a low-priority partner or internal promotion on the terms page.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script src="../scripts/runtime-config.js"></script>
+  <script src="../scripts/script.js"></script>
+</body>
+</html>

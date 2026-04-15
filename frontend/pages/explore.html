@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Templates - Pagefolio</title>
+  <meta name="description" content="Browse Pagefolio templates and choose the style you want to use." />
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/explore.css" />
+</head>
+<body>
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><div class="nav-logo-dot"></div>Pagefolio</a>
+      <div class="nav-links">
+        <a href="explore.html" class="nav-link active">Explore</a>
+        <a href="choose.html" class="nav-link">Choose Type</a>
+        <a href="profile.html" class="nav-link">Demo</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Theme</button>
+        <a href="auth.html" class="btn btn-ghost btn-sm">Sign in</a>
+        <a href="dashboard.html" class="btn btn-primary btn-sm" data-dashboard-link>Dashboard</a>
+        <div class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="explore.html" class="nav-link">Explore</a>
+    <a href="choose.html" class="nav-link">Choose Type</a>
+    <a href="auth.html" class="nav-link">Sign in</a>
+    <a href="dashboard.html" class="btn btn-primary" style="margin-top:8px;" data-dashboard-link>Dashboard</a>
+  </div>
+
+  <div class="explore-header">
+    <div class="container">
+      <span class="eyebrow animate-fade-up">Explore</span>
+      <h1 class="animate-fade-up delay-1" id="exploreModeTitle">Choose a template you like</h1>
+      <p class="animate-fade-up delay-2" id="exploreModeDescription">Browse the starting designs, filter by category, and pick the one you want to build on.</p>
+    </div>
+  </div>
+
+  <section class="explore-search-section">
+    <div class="container">
+      <div class="explore-search-card reveal">
+        <div class="explore-search-copy">
+          <span class="badge badge-gold">Template gallery</span>
+          <h2>Find the right style faster</h2>
+          <p>Search by profession, use case, or vibe to narrow down the best starting point for your page.</p>
+        </div>
+        <div class="explore-search-controls">
+          <label class="explore-search-label" for="exploreSearch">Search templates</label>
+          <div class="explore-search-input-wrap">
+            <span class="explore-search-icon">Search</span>
+            <input type="search" id="exploreSearch" class="input-field explore-search-input" placeholder="Try: lawyer, student, creator, business" />
+          </div>
+          <div class="explore-search-meta">
+            <span id="exploreStoredLink">Preferred link: ablabsbusiness-create.github.io/Pagefolio/yourname</span>
+            <span id="exploreResultsLabel">Showing matching templates</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="filter-bar-section">
+    <div class="container">
+      <div class="filter-bar" data-filter-group data-filter-target="#profilesGrid">
+        <button class="filter-btn active" data-filter="all">All templates</button>
+        <button class="filter-btn" data-filter="business">Business</button>
+        <button class="filter-btn" data-filter="professional">Professional</button>
+        <button class="filter-btn" data-filter="creator">Creator</button>
+        <button class="filter-btn" data-filter="student">Student</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="ad-slot ad-slot-inline reveal">
+        <div class="ad-slot-inner">
+          <div class="ad-slot-meta">
+            <span class="ad-slot-label">Ad placeholder</span>
+            <span class="ad-slot-tier">Explore</span>
+          </div>
+          <h3>Reserved sponsor space</h3>
+          <p>This placeholder can be used for a featured partner or promoted template message on the explore page.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="profiles-section section-sm">
+    <div class="container">
+      <div class="profiles-grid" id="profilesGrid">
+        <div class="profile-card reveal" data-category="professional" data-product="website">
+          <div class="profile-cover" style="background: linear-gradient(135deg, #0a0e1a 0%, #141c30 55%, #c084fc 100%);"></div>
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" style="background:linear-gradient(135deg,#312e81,#c084fc)">L</div>
+              <span class="profile-status">New</span>
+            </div>
+            <div class="profile-info">
+              <h3>Adv Dass Legal</h3>
+              <p class="profile-title">Premium advocate and legal consultant website</p>
+              <p class="profile-bio">A polished full-website template with a luxury legal feel, strong credibility sections, and a refined presentation for advocates and law practices.</p>
+              <div class="profile-tags"><span class="tag">Professional</span><span class="tag">Legal</span></div>
+            </div>
+            <div class="profile-card-footer">
+              <div class="profile-url"><span>Hero, about, services, testimonials, contact</span></div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn btn-ghost btn-sm" href="../templates/full-website/lawyer/1/adv-dass-legal.html">Preview</a>
+                <button class="btn btn-primary btn-sm" type="button" data-template="adv-dass-legal">Choose</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" data-category="business" data-product="website">
+          <div class="profile-cover" style="background: linear-gradient(135deg, #1f1147 0%, #6d28d9 60%, #c084fc 100%);"></div>
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" style="background:linear-gradient(135deg,#6d28d9,#c084fc)">B</div>
+              <span class="profile-status">Classic</span>
+            </div>
+            <div class="profile-info">
+              <h3>Business Classic</h3>
+              <p class="profile-title">Clean service-first business layout</p>
+              <p class="profile-bio">Best for clinics, agencies, firms, and local businesses that need a complete and trustworthy look.</p>
+              <div class="profile-tags"><span class="tag">Business</span><span class="tag">Services</span></div>
+            </div>
+            <div class="profile-card-footer">
+              <div class="profile-url"><span>Home, services, about, contact</span></div>
+              <button class="btn btn-primary btn-sm" type="button" data-template="business-classic">Choose</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" data-category="professional" data-product="website">
+          <div class="profile-cover" style="background: linear-gradient(135deg, #0f172a 0%, #4338ca 60%, #a78bfa 100%);"></div>
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" style="background:linear-gradient(135deg,#4338ca,#a78bfa)">P</div>
+              <span class="profile-status">Pro</span>
+            </div>
+            <div class="profile-info">
+              <h3>Professional Studio</h3>
+              <p class="profile-title">Refined personal brand layout</p>
+              <p class="profile-bio">Ideal for consultants, teachers, coaches, and service professionals who want a confident modern site.</p>
+              <div class="profile-tags"><span class="tag">Professional</span><span class="tag">Personal Brand</span></div>
+            </div>
+            <div class="profile-card-footer">
+              <div class="profile-url"><span>About, services, testimonials, contact</span></div>
+              <button class="btn btn-primary btn-sm" type="button" data-template="professional-studio">Choose</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" data-category="creator" data-product="website">
+          <div class="profile-cover" style="background: linear-gradient(135deg, #31124c 0%, #7c3aed 60%, #f472b6 100%);"></div>
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" style="background:linear-gradient(135deg,#7c3aed,#f472b6)">C</div>
+              <span class="profile-status">Bold</span>
+            </div>
+            <div class="profile-info">
+              <h3>Creator Brand</h3>
+              <p class="profile-title">Media and audience focused layout</p>
+              <p class="profile-bio">A vibrant design for creators, speakers, and educators who want strong personality and clear calls to action.</p>
+              <div class="profile-tags"><span class="tag">Creator</span><span class="tag">Media</span></div>
+            </div>
+            <div class="profile-card-footer">
+              <div class="profile-url"><span>Hero, offers, features, links</span></div>
+              <button class="btn btn-primary btn-sm" type="button" data-template="creator-brand">Choose</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" data-category="student" data-product="website">
+          <div class="profile-cover" style="background: linear-gradient(135deg, #1f2937 0%, #4f46e5 60%, #93c5fd 100%);"></div>
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" style="background:linear-gradient(135deg,#4f46e5,#93c5fd)">S</div>
+              <span class="profile-status">Fresh</span>
+            </div>
+            <div class="profile-info">
+              <h3>Student Portfolio</h3>
+              <p class="profile-title">Simple portfolio and resume layout</p>
+              <p class="profile-bio">Great for students who want to highlight projects, skills, achievements, and ways to get in touch.</p>
+              <div class="profile-tags"><span class="tag">Student</span><span class="tag">Portfolio</span></div>
+            </div>
+            <div class="profile-card-footer">
+              <div class="profile-url"><span>Projects, resume, achievements, contact</span></div>
+              <button class="btn btn-primary btn-sm" type="button" data-template="student-portfolio">Choose</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" data-category="creator" data-product="webpage">
+          <div class="profile-cover" style="background: linear-gradient(135deg, #24123a 0%, #6d28d9 60%, #c084fc 100%);"></div>
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" style="background:linear-gradient(135deg,#6d28d9,#c084fc)">L</div>
+              <span class="profile-status">Quick</span>
+            </div>
+            <div class="profile-info">
+              <h3>Creator Link Page</h3>
+              <p class="profile-title">Fast one-page link layout</p>
+              <p class="profile-bio">A compact and stylish starter for creators who want intro text, key links, and a clear action section.</p>
+              <div class="profile-tags"><span class="tag">Creator</span><span class="tag">Links</span></div>
+            </div>
+            <div class="profile-card-footer">
+              <div class="profile-url"><span>Bio, links, offers, contact</span></div>
+              <button class="btn btn-primary btn-sm" type="button" data-template="creator-link-page">Choose</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" data-category="professional" data-product="webpage">
+          <div class="profile-cover" style="background: linear-gradient(135deg, #0f172a 0%, #2563eb 60%, #60a5fa 100%);"></div>
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" style="background:linear-gradient(135deg,#2563eb,#60a5fa)">M</div>
+              <span class="profile-status">Minimal</span>
+            </div>
+            <div class="profile-info">
+              <h3>Professional Profile</h3>
+              <p class="profile-title">Minimal service profile layout</p>
+              <p class="profile-bio">Built for consultants, teachers, doctors, and specialists who need one clean page with a strong intro.</p>
+              <div class="profile-tags"><span class="tag">Professional</span><span class="tag">Minimal</span></div>
+            </div>
+            <div class="profile-card-footer">
+              <div class="profile-url"><span>Headline, services, links, contact</span></div>
+              <button class="btn btn-primary btn-sm" type="button" data-template="professional-profile">Choose</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-card reveal" data-category="business" data-product="webpage">
+          <div class="profile-cover" style="background: linear-gradient(135deg, #14532d 0%, #059669 60%, #6ee7b7 100%);"></div>
+          <div class="profile-card-body">
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar" style="background:linear-gradient(135deg,#059669,#6ee7b7)">I</div>
+              <span class="profile-status">Easy</span>
+            </div>
+            <div class="profile-info">
+              <h3>Business Intro Page</h3>
+              <p class="profile-title">Compact business starter layout</p>
+              <p class="profile-bio">Ideal for small businesses that want a simple first page with services, contact, and WhatsApp actions.</p>
+              <div class="profile-tags"><span class="tag">Business</span><span class="tag">Contact</span></div>
+            </div>
+            <div class="profile-card-footer">
+              <div class="profile-url"><span>Intro, services, action buttons, contact</span></div>
+              <button class="btn btn-primary btn-sm" type="button" data-template="business-intro-page">Choose</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:48px;">
+        <button class="btn btn-secondary btn-lg" id="loadMoreBtn" type="button">Load more templates</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="background:var(--bg-subtle);">
+    <div class="container">
+      <div class="explore-empty-state" id="exploreEmptyState" hidden>
+        <div class="explore-empty-icon">Find</div>
+        <h3>No templates match that search yet</h3>
+        <p>Try another keyword like <strong>business</strong>, <strong>creator</strong>, or <strong>student</strong>.</p>
+      </div>
+      <div class="explore-cta reveal">
+        <h2>Choose a template and continue</h2>
+        <p>The next step can ask for the content needed for the design you selected.</p>
+        <button class="btn btn-primary btn-lg" type="button" id="continueTemplateButton" style="margin-top:24px;">Choose a template first</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="color:#fff;"><div class="nav-logo-dot"></div>Pagefolio</div>
+          <p>Your personal page, on your own branded link.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <a href="index.html">Home</a>
+          <a href="explore.html">Explore</a>
+          <a href="dashboard.html" data-dashboard-link>Dashboard</a>
+        </div>
+        <div class="footer-col">
+          <h4>Templates</h4>
+          <a href="#">Business</a>
+          <a href="#">Professional</a>
+          <a href="#">Creator</a>
+        </div>
+        <div class="footer-col">
+          <h4>Next</h4>
+          <a href="#">Details</a>
+          <a href="#">Editor</a>
+          <a href="#">Publish</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Pagefolio</span>
+        <span>ablabsbusiness-create.github.io/Pagefolio</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../scripts/runtime-config.js"></script>
+  <script src="../scripts/script.js"></script>
+  <script>
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', function() {
+        this.textContent = 'You have seen all templates';
+        this.disabled = true;
+        this.style.opacity = '0.6';
+      });
+    }
+  </script>
+</body>
+</html>

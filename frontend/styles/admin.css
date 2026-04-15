@@ -1,0 +1,236 @@
+.admin-body {
+  min-height: 100vh;
+  background: var(--bg-subtle);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.admin-main {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.admin-subtitle {
+  color: var(--text-muted);
+  margin: 8px 0 16px;
+}
+
+.admin-status {
+  margin-top: 12px;
+  color: var(--text-muted);
+}
+
+.admin-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.admin-list {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+.admin-row-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.admin-row-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.admin-row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-link {
+  color: var(--accent-2);
+  font-size: 0.8rem;
+}
+
+.admin-payments-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+.admin-payments-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.admin-payments-table th,
+.admin-payments-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  font-size: 0.84rem;
+}
+
+.admin-payments-table th {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--bg-subtle) 84%, var(--bg-card) 16%);
+}
+
+.admin-payments-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-payment-uid,
+.admin-payment-txn {
+  font-family: "Courier New", monospace;
+  word-break: break-all;
+}
+
+@media (max-width: 720px) {
+  .admin-body {
+    background:
+      radial-gradient(circle at top, rgba(139,92,246,0.16), transparent 26%),
+      linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, #ede9fe 8%) 100%);
+  }
+
+  .admin-header {
+    position: sticky;
+    top: 16px;
+    z-index: 20;
+    width: calc(100% - 24px);
+    margin: 16px auto 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-md);
+  }
+
+  [data-theme="dark"] .admin-header {
+    background: rgba(24,24,24,0.84);
+  }
+
+  .admin-header .nav-logo {
+    font-size: 0.96rem;
+    white-space: nowrap;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .admin-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+
+  .admin-actions .btn {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  .admin-main {
+    padding: 20px 12px 32px;
+    gap: 16px;
+  }
+
+  .admin-card {
+    border-radius: 24px;
+    padding: 20px 16px;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  [data-theme="dark"] .admin-card {
+    background: rgba(24,24,24,0.9);
+  }
+
+  .admin-list-header {
+    gap: 8px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-row {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .admin-row-actions .btn {
+    width: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-header {
+    padding: 8px 10px;
+  }
+
+  .admin-header .nav-logo {
+    font-size: 0.88rem;
+  }
+
+  .admin-actions {
+    gap: 6px;
+  }
+
+  .admin-actions .btn {
+    padding: 7px 9px;
+    font-size: 0.72rem;
+  }
+}

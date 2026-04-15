@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - Pagefolio</title>
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <style>
+    .legal-shell {
+      padding: calc(var(--nav-height) + 52px) 0 72px;
+    }
+
+    .legal-card {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 36px;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    [data-theme="dark"] .legal-card {
+      background: rgba(24,24,24,0.88);
+    }
+
+    .legal-meta {
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .legal-sections {
+      display: grid;
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .legal-sections section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legal-sections p,
+    .legal-sections li {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .legal-sections ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .legal-shell {
+        padding-top: calc(var(--nav-height) + 34px);
+      }
+
+      .legal-card {
+        padding: 24px 18px;
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-dot"></div>
+        Pagefolio
+      </a>
+      <div class="nav-links">
+        <a href="explore.html" class="nav-link">Explore</a>
+        <a href="Pricing-page.html" class="nav-link">Pricing</a>
+        <a href="profile.html" class="nav-link">Demo</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Theme</button>
+        <a href="auth.html" class="btn btn-ghost btn-sm">Sign in</a>
+        <a href="auth.html" class="btn btn-primary btn-sm">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="legal-shell">
+    <div class="container">
+      <article class="legal-card">
+        <span class="eyebrow">Legal</span>
+        <h1 style="margin-top:16px;">Privacy Policy</h1>
+        <p class="legal-meta">Last updated: April 14, 2026</p>
+
+        <div class="legal-sections">
+          <section>
+            <h2>Information We Collect</h2>
+            <p>Pagefolio collects information you provide directly, such as your name, email address, phone number, username, profile content, links, and website details. If you sign in with Google, we may also receive basic account information such as your display name and email address.</p>
+          </section>
+
+          <section>
+            <h2>Why We Collect It</h2>
+            <ul>
+              <li>To create and manage your Pagefolio account.</li>
+              <li>To publish and maintain your public page or website.</li>
+              <li>To help visitors contact you through the information you choose to publish.</li>
+              <li>To improve the platform, security, and user experience.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Public Information</h2>
+            <p>Some information you submit is intended to be public, such as your profile name, public link, services, business details, and contact information you choose to display on your page. Do not submit private information that you do not want made public.</p>
+          </section>
+
+          <section>
+            <h2>How We Store and Process Data</h2>
+            <p>Your information may be stored and processed using services such as authentication providers, databases, hosting providers, and repository tools used to publish your page. We use that information only as needed to operate Pagefolio.</p>
+          </section>
+
+          <section>
+            <h2>Sharing</h2>
+            <p>We do not sell your personal information. We may share data with service providers that help us run the platform, or where required by law, security needs, or to protect rights and safety.</p>
+          </section>
+
+          <section>
+            <h2>Your Choices</h2>
+            <p>You may request updates or deletion of your account information, subject to technical, legal, and operational limits. Public content already published may remain visible until it is removed or updated.</p>
+          </section>
+
+          <section>
+            <h2>Data Security</h2>
+            <p>We take reasonable steps to protect your information, but no system can guarantee complete security. You are responsible for keeping your account access secure.</p>
+          </section>
+
+          <section>
+            <h2>Children's Privacy</h2>
+            <p>Pagefolio is not intended for children under 13, and we do not knowingly collect personal information from children under 13.</p>
+          </section>
+
+          <section>
+            <h2>Contact</h2>
+            <p>If you have privacy questions or requests related to information collected through Pagefolio, contact the site operator before submitting sensitive personal data.</p>
+          </section>
+        </div>
+
+        <div class="ad-slot ad-slot-inline">
+          <div class="ad-slot-inner">
+            <div class="ad-slot-meta">
+              <span class="ad-slot-label">Ad placeholder</span>
+              <span class="ad-slot-tier">Privacy page</span>
+            </div>
+            <h3>Reserved sponsor space</h3>
+            <p>This placeholder can be used for a low-priority legal-page sponsor or informational partner block.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script src="../scripts/runtime-config.js"></script>
+  <script src="../scripts/script.js"></script>
+</body>
+</html>

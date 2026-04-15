@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - Pagefolio</title>
+  <meta name="google-signin-client_id" content="259578638994-p0dme71bqs7qs0ememv4i6vcdrg7oqe9.apps.googleusercontent.com" />
+  <meta name="firebase-api-key" content="AIzaSyDr3qHEZuz4Xzz8x6a7IzRdfbpdS3xlreE" />
+  <meta name="firebase-auth-domain" content="pagafolio.firebaseapp.com" />
+  <meta name="firebase-project-id" content="pagafolio" />
+  <meta name="firebase-app-id" content="1:480870775548:web:ad001ea8c902b733bc7579" />
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/auth.css" />
+</head>
+<body class="auth-body">
+
+  <div class="auth-back">
+    <div class="auth-back-card">
+      <a href="index.html" class="nav-logo auth-mobile-top-logo"><div class="nav-logo-dot"></div>Pagefolio</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+
+  <div class="auth-layout">
+    <div class="auth-panel-left">
+      <div class="auth-panel-content">
+        <h2 class="auth-headline">Your page.<br><em>Your link.</em></h2>
+        <p class="auth-tagline">Join thousands of creators, lawyers, doctors, and freelancers who use Pagefolio as their online home.</p>
+        <div class="auth-trust-row">
+          <span class="auth-trust-pill">Setup in minutes</span>
+          <span class="auth-trust-pill">Mobile-ready</span>
+          <span class="auth-trust-pill">Custom branded link</span>
+        </div>
+
+        <div class="auth-preview-cards">
+          <div class="auth-preview-card" style="--shift:-3deg;">
+            <div class="apc-cover" style="background:linear-gradient(135deg,#24123a,#7c3aed)"></div>
+            <div class="apc-body">
+              <div class="apc-avatar" style="background:linear-gradient(135deg,#7c3aed,#c084fc)">A</div>
+              <div class="apc-name">Aaditya Verma</div>
+              <div class="apc-title">Developer & Creator</div>
+              <div class="apc-url">ablabsbusiness-create.github.io/Pagefolio/aaditya</div>
+            </div>
+          </div>
+          <div class="auth-preview-card" style="--shift:2deg; --z:1;">
+            <div class="apc-cover" style="background:linear-gradient(135deg,#312e81,#8b5cf6)"></div>
+            <div class="apc-body">
+              <div class="apc-avatar" style="background:linear-gradient(135deg,#8b5cf6,#c084fc)">D</div>
+              <div class="apc-name">Dr. Priya Sharma</div>
+              <div class="apc-title">Dentist & Specialist</div>
+              <div class="apc-url">ablabsbusiness-create.github.io/Pagefolio/drsharma</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-stats">
+          <div class="auth-stat">
+            <strong>12,000+</strong>
+            <span>pages created</span>
+          </div>
+          <div class="auth-stat">
+            <strong>Free</strong>
+            <span>to get started</span>
+          </div>
+          <div class="auth-stat">
+            <strong>4 min</strong>
+            <span>avg. setup</span>
+          </div>
+        </div>
+
+        <div class="auth-benefit-list">
+          <div class="auth-benefit-item">
+            <span class="auth-benefit-dot"></span>
+            <span>Showcase links, projects, services, and contact info in one clean page.</span>
+          </div>
+          <div class="auth-benefit-item">
+            <span class="auth-benefit-dot"></span>
+            <span>Perfect for creators, doctors, students, lawyers, coaches, and freelancers.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-panel-right">
+      <div class="auth-form-card">
+        <div class="auth-tabs" data-tab-group>
+          <button class="auth-tab active" data-tab="signup">Sign up</button>
+          <button class="auth-tab" data-tab="login">Sign in</button>
+        </div>
+
+        <div class="auth-form" data-tab-panel="signup">
+          <div class="auth-form-header">
+            <h1>Create your page</h1>
+            <p>Free forever. No credit card required.</p>
+          </div>
+
+          <div class="google-auth-wrap">
+            <div class="google-auth-button" id="googleSignupButton"></div>
+          </div>
+
+          <div class="auth-divider" style="display:none;"><span>or sign up with email</span></div>
+
+          <div class="auth-fields" style="display:none;">
+            <div class="input-group">
+              <label class="input-label">Your name</label>
+              <input type="text" class="input-field" placeholder="Aaditya Sharma" id="signupName" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">Username</label>
+              <div class="username-input-wrap">
+                <span class="username-prefix">ablabsbusiness-create.github.io/Pagefolio/</span>
+                <input type="text" class="input-field username-field" placeholder="yourname" id="usernameInput" />
+              </div>
+              <div class="username-status" id="usernameStatus"></div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Email address</label>
+              <input type="email" class="input-field" placeholder="you@example.com" id="signupEmail" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">Password</label>
+              <div class="password-input-wrap">
+                <input type="password" class="input-field" placeholder="Min 8 characters" id="passwordInput" />
+                <button class="password-toggle" onclick="togglePassword('passwordInput', this)" type="button">👁️</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary auth-submit" type="button" onclick="handleSignup()" style="display:none;">Create my free page</button>
+
+          <p class="auth-terms">
+            By signing up, you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.
+          </p>
+          
+        </div>
+
+        <div class="auth-form" data-tab-panel="login" style="display:none;">
+          <div class="auth-form-header">
+            <h1>Welcome back</h1>
+            <p>Sign in to your Pagefolio account.</p>
+          </div>
+
+          <div class="google-auth-wrap">
+            <div class="google-auth-button" id="googleLoginButton"></div>
+          </div>
+
+          <div class="auth-divider" style="display:none;"><span>or sign in with email</span></div>
+
+          <div class="auth-fields" style="display:none;">
+            <div class="input-group">
+              <label class="input-label">Email address</label>
+              <input type="text" class="input-field" placeholder="Email or username" id="loginEmail" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">Password</label>
+              <div class="password-input-wrap">
+                <input type="password" class="input-field" placeholder="Your password" id="loginPasswordInput" />
+                <button class="password-toggle" onclick="togglePassword('loginPasswordInput', this)" type="button">👁️</button>
+              </div>
+              <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+          </div>
+
+          <button class="btn btn-primary auth-submit" type="button" onclick="handleLogin()" style="display:none;">Sign in to Pagefolio</button>
+          
+        </div>
+      </div>
+
+      <div class="auth-mobile-intro auth-mobile-top-card">
+        <span class="eyebrow">Start free</span>
+        <h2 class="auth-mobile-headline">Your page. Your link.</h2>
+        <p class="auth-mobile-tagline">Create your personal website in minutes and share one clean link for your work, services, and contact details.</p>
+      </div>
+
+      <div class="auth-mobile-intro auth-mobile-info-card">
+        <div class="auth-mobile-trust">
+          <span><strong>12,000+</strong><small>pages created</small></span>
+          <span><strong>Free</strong><small>to get started</small></span>
+          <span><strong>4 min</strong><small>avg. setup</small></span>
+        </div>
+      </div>
+
+      <div class="ad-slot ad-slot-inline">
+        <div class="ad-slot-inner">
+          <div class="ad-slot-meta">
+            <span class="ad-slot-label">Ad placeholder</span>
+            <span class="ad-slot-tier">Auth page</span>
+          </div>
+          <h3>Reserved sponsor space</h3>
+          <p>This placeholder can be used for a brand message, promotion, or partner block on the auth page.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer onload="window.initGoogleAuth && window.initGoogleAuth()"></script>
+  <script src="../scripts/runtime-config.js"></script>
+  <script src="../scripts/script.js"></script>
+  <script>
+    // Auth behavior is handled in script.js so it works across static pages.
+  </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Pagefolio</title>
+  <meta name="firebase-api-key" content="AIzaSyDr3qHEZuz4Xzz8x6a7IzRdfbpdS3xlreE" />
+  <meta name="firebase-auth-domain" content="pagafolio.firebaseapp.com" />
+  <meta name="firebase-project-id" content="pagafolio" />
+  <meta name="firebase-app-id" content="1:480870775548:web:ad001ea8c902b733bc7579" />
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/admin.css" />
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <div class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      Pagefolio Admin
+    </div>
+    <div class="admin-actions">
+      <button class="btn btn-ghost btn-sm" id="adminRefreshButton" type="button">Refresh</button>
+      <button class="btn btn-secondary btn-sm" id="adminLogoutButton" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-card">
+      <h1>Published websites</h1>
+      <p class="admin-subtitle">Open each repo folder, check the live link, and delete the website folder when needed.</p>
+      <button class="btn btn-primary" id="adminLoginButton" type="button">Continue with Google</button>
+      <div class="admin-status" id="adminStatus"></div>
+    </section>
+
+    <section class="admin-card" id="adminFoldersCard" hidden>
+      <div class="admin-list-header">
+        <h2>Websites</h2>
+        <span id="adminFolderCount">0 websites</span>
+      </div>
+      <div class="admin-list" id="adminFoldersList"></div>
+    </section>
+
+    <section class="admin-card" id="adminPaymentsCard" hidden>
+      <div class="admin-list-header">
+        <h2>Payments</h2>
+        <span id="adminPaymentCount">0 records</span>
+      </div>
+      <div class="admin-payments-wrap">
+        <table class="admin-payments-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>UID</th>
+              <th>Transaction ID</th>
+              <th>Amount</th>
+              <th>Source</th>
+              <th>Submitted</th>
+            </tr>
+          </thead>
+          <tbody id="adminPaymentsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="../scripts/runtime-config.js"></script>
+  <script src="../scripts/script.js"></script>
+</body>
+</html>
