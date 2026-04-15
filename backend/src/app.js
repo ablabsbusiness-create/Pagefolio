@@ -13,10 +13,20 @@ const errorMiddleware = require("./middleware/error.middleware");
 
 const app = express();
 
-const allowedOrigins = env.clientUrl
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+const defaultAllowedOrigins = [
+  "http://127.0.0.1:5500",
+  "http://localhost:5500",
+  "https://ablabsbusiness-create.github.io"
+];
+
+const allowedOrigins = Array.from(
+  new Set(
+    [...defaultAllowedOrigins, ...String(env.clientUrl || "")
+      .split(",")
+      .map((origin) => origin.trim())
+      .filter(Boolean)]
+  )
+);
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -27,12 +37,14 @@ const corsOptions = {
 
     return callback(new Error("CORS policy blocked this origin"));
   },
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 204
 };
 
 app.set("trust proxy", true);
 app.use(helmet());
 app.use(cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan(env.nodeEnv === "production" ? "combined" : "dev"));
