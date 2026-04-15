@@ -106,11 +106,13 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.92rem;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .explore-search-input {
-  padding-left: 44px;
+  padding-left: 42px;
   min-height: 56px;
   border-radius: 18px;
 }
@@ -341,6 +343,21 @@
   .explore-search-meta {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .explore-search-label {
+    font-size: 0.74rem;
+  }
+
+  .explore-search-icon {
+    left: 14px;
+    font-size: 0.86rem;
+  }
+
+  .explore-search-input {
+    min-height: 52px;
+    padding-left: 38px;
+    font-size: 0.88rem;
   }
 
   .profiles-grid { grid-template-columns: 1fr; }
