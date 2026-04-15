@@ -234,8 +234,10 @@
 
 .auth-panel-right {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 24px;
   padding: 80px 60px;
   background: var(--bg);
 }
@@ -258,6 +260,16 @@
 
 [data-theme="dark"] .auth-form-card {
   background: rgba(24,24,24,0.82);
+}
+
+.auth-panel-right .ad-slot {
+  width: 100%;
+  max-width: 400px;
+  margin: 0;
+}
+
+.auth-panel-right .ad-slot-inline {
+  align-self: center;
 }
 
 .auth-tabs {
