@@ -523,14 +523,20 @@ function clearAuthSession() {
 async function apiRequest(path, options = {}) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 8000);
+  const headers = {};
+
+  if (options.body) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  if (options.token) {
+    headers.Authorization = `Bearer ${options.token}`;
+  }
 
   let response;
   try {
     response = await fetch(`${PF_API_BASE}${path}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...(options.token ? { Authorization: `Bearer ${options.token}` } : {})
-      },
+      headers,
       method: options.method || 'GET',
       body: options.body ? JSON.stringify(options.body) : undefined,
       signal: controller.signal
@@ -539,6 +545,9 @@ async function apiRequest(path, options = {}) {
     clearTimeout(timeout);
     if (error?.name === 'AbortError') {
       throw new Error('Server did not respond. Is backend running?');
+    }
+    if (error instanceof TypeError) {
+      throw new Error('Could not reach the server. Please refresh and try again.');
     }
     throw error;
   } finally {
