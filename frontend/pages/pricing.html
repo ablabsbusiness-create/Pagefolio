@@ -378,6 +378,18 @@
       line-height: 1.7;
     }
 
+    .pricing-wait-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 12px 0 8px;
+    }
+
+    .pricing-wait-title-row h2 {
+      margin: 0 !important;
+    }
+
     .pricing-wait-pulse {
       width: 14px;
       height: 14px;
@@ -444,7 +456,8 @@
       .pricing-setup-actions,
       .pricing-live-note,
       .pricing-wait-head,
-      .pricing-wait-actions {
+      .pricing-wait-actions,
+      .pricing-wait-title-row {
         flex-direction: column;
         align-items: stretch;
       }
@@ -602,36 +615,20 @@
         </div>
       </div>
 
-      <div class="pricing-setup-banner" id="pricingSetupBanner" hidden>
-        <div class="pricing-setup-row">
-          <div>
-            <span class="eyebrow">Publishing</span>
-            <h2 style="margin:12px 0 8px;">Your dashboard is getting ready</h2>
-            <p id="pricingSetupStatus" style="margin:0;">We are setting things up in the background.</p>
-          </div>
-          <div class="pricing-setup-actions">
-            <button class="btn btn-secondary" type="button" id="pricingSkipButton">Skip pricing</button>
-          </div>
-        </div>
-        <div class="pricing-setup-url" id="pricingSetupUrl"></div>
-      </div>
-
-      <div class="pricing-wait-card" id="pricingWaitCard" hidden>
+      <div class="pricing-setup-banner pricing-wait-card" id="pricingSetupBanner" hidden>
         <div class="pricing-wait-head">
           <div class="pricing-wait-copy">
-            <span class="eyebrow">Please Wait</span>
-            <h2 style="margin:12px 0 8px;">We will take you to your dashboard in a sec</h2>
-            <p>Your website is still being published. Keep this page open and we will move you automatically the moment it goes live.</p>
+            <span class="eyebrow">Publishing</span>
+            <div class="pricing-wait-title-row">
+              <h2>Your dashboard is getting ready</h2>
+            </div>
+            <p id="pricingSetupStatus" style="margin:0;">Your website is still being published. Keep this page open and we will move you automatically the moment it goes live.</p>
           </div>
-          <div class="pricing-wait-pulse" aria-hidden="true"></div>
         </div>
         <div class="pricing-wait-status" id="pricingWaitStatus">
           Doing the magic behind the curtain...
         </div>
-        <div class="pricing-wait-actions">
-          <button class="btn btn-primary" type="button" id="pricingWaitContinueButton">Keep waiting</button>
-          <button class="btn btn-secondary" type="button" id="pricingWaitHideButton">Back to pricing</button>
-        </div>
+        <div class="pricing-setup-url" id="pricingSetupUrl"></div>
       </div>
     </div>
   </section>

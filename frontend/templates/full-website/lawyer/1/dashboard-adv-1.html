@@ -1149,6 +1149,20 @@
       .sidebar.open { transform: translateX(0); }
       .dashboard-main { margin-left: 0; }
       .sidebar-toggle { display: flex; }
+      .dashboard-content {
+        padding: 14px;
+        gap: 16px;
+      }
+      .dashboard-stack {
+        gap: 16px;
+      }
+      .dashboard-section,
+      .dash-card {
+        border-radius: 22px;
+      }
+      .dash-card {
+        padding: 18px;
+      }
       .topbar {
         height: auto;
         padding: 10px 12px;
@@ -1195,9 +1209,47 @@
       .topbar-right .btn-secondary {
         display: inline-flex;
       }
-      .dashboard-content { padding: 16px; }
       .stats-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .themes-grid { grid-template-columns: repeat(3, 1fr); }
+      .dash-card-header {
+        gap: 10px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .dash-card-header h3 {
+        font-size: 1rem;
+      }
+      .form-grid-two {
+        gap: 12px;
+      }
+      .input-field {
+        padding: 11px 14px;
+        font-size: 0.88rem;
+      }
+      textarea.input-field {
+        min-height: 104px;
+      }
+      .editor-item,
+      .editor-item.compact {
+        padding: 14px;
+      }
+      .editor-item-title {
+        align-items: flex-start;
+      }
+      .editor-item-head {
+        margin-bottom: 0;
+      }
+      .completeness-bar {
+        padding: 18px;
+        border-radius: 22px;
+      }
+      .completeness-missing {
+        gap: 10px;
+      }
+      .completeness-missing .btn {
+        width: 100%;
+        justify-content: center;
+      }
       .quick-action-card {
         grid-template-columns: auto 1fr;
         align-items: start;
@@ -1206,6 +1258,29 @@
     }
 
     @media (max-width: 480px) {
+      .dashboard-content {
+        padding: 12px;
+        gap: 14px;
+      }
+      .dash-card {
+        padding: 16px;
+        border-radius: 20px;
+      }
+      .completeness-bar {
+        padding: 16px;
+        border-radius: 20px;
+      }
+      .completeness-info {
+        gap: 8px;
+      }
+      .completeness-label,
+      .completeness-pct {
+        font-size: 0.86rem;
+      }
+      .completeness-missing {
+        font-size: 0.78rem;
+        line-height: 1.55;
+      }
       .topbar-right {
         grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
         gap: 6px;
@@ -1225,6 +1300,39 @@
         min-width: 32px;
         height: 32px;
         font-size: 0.84rem;
+      }
+      .dash-card-header {
+        gap: 8px;
+      }
+      .dash-card-header h3 {
+        font-size: 0.96rem;
+      }
+      .input-label {
+        font-size: 0.76rem;
+      }
+      .input-field {
+        padding: 10px 12px;
+        font-size: 0.84rem;
+      }
+      textarea.input-field {
+        min-height: 96px;
+      }
+      .editor-list {
+        gap: 12px;
+      }
+      .editor-item,
+      .editor-item.compact {
+        padding: 12px;
+      }
+      .editor-item-title {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .editor-item-remove {
+        align-self: flex-start;
+      }
+      .dashboard-save-button {
+        margin-top: 10px;
       }
       .quick-action-card {
         grid-template-columns: 1fr;
@@ -2189,7 +2297,7 @@
         } catch (error) {
           console.warn('Could not fully sign out:', error);
         } finally {
-          window.location.href = '../../../pages/index.html';
+          window.location.href = 'https://ablabsbusiness-create.github.io/Pagefolio/frontend/pages/auth.html';
         }
       });
     }

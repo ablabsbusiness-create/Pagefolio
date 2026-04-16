@@ -1531,7 +1531,7 @@ function initPricingPublishFlow() {
   const overlayStatus = document.getElementById('pricingLoaderStatus');
   const overlayHint = document.getElementById('pricingLoaderHint');
   const openButton = document.getElementById('pricingOpenDashboardButton');
-  const waitCard = document.getElementById('pricingWaitCard');
+  const waitCard = document.getElementById('pricingWaitCard') || setupBanner;
   const waitStatus = document.getElementById('pricingWaitStatus');
   const waitContinueButton = document.getElementById('pricingWaitContinueButton');
   const waitHideButton = document.getElementById('pricingWaitHideButton');
@@ -1542,7 +1542,7 @@ function initPricingPublishFlow() {
     setupBanner.hidden = false;
   }
   if (statusText) {
-    statusText.textContent = 'We are publishing your dashboard right now. You can look at pricing or skip ahead and wait with us.';
+    statusText.textContent = 'Your website is still being published. Keep this page open and we will move you automatically the moment it goes live.';
   }
   if (urlText) {
     urlText.textContent = state.websiteUrl || state.dashboardUrl;
@@ -1692,10 +1692,10 @@ function initPricingPublishFlow() {
   }, 7000);
 
   messageTimer = setInterval(() => {
-    if (!overlayActive || isRedirecting) return;
+    if (isRedirecting) return;
     pollCount += 1;
     setOverlayMessage(loadingMessages[pollCount % loadingMessages.length]);
-  }, 2400);
+  }, 3500);
 
   pollUntilReady();
   pollTimer = setInterval(pollUntilReady, 3500);
