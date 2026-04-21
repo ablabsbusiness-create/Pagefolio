@@ -75,6 +75,17 @@ const templateRegistry = {
       __dirname,
       "../../../frontend/templates/full-website/lawyer/1/dashboard-adv-1.html"
     )
+  },
+  "little-care-child": {
+    websiteType: "website",
+    sourcePath: path.resolve(
+      __dirname,
+      "../../../frontend/templates/full-website/Children Doctor/1/child-care.html"
+    ),
+    dashboardPath: path.resolve(
+      __dirname,
+      "../../../frontend/templates/full-website/Children Doctor/1/dashboard-child-1.html"
+    )
   }
 };
 
@@ -95,14 +106,50 @@ const escapeRegex = (value = "") =>
   String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 const replaceElementContentById = (html, id, content) => {
-  const pattern = new RegExp(
-    `(<([a-z0-9-]+)[^>]*id=["']${escapeRegex(id)}["'][^>]*>)([\\s\\S]*?)(</\\2>)`,
+  const openPattern = new RegExp(
+    `<([a-z0-9-]+)[^>]*id=["']${escapeRegex(id)}["'][^>]*>`,
     "i"
   );
+  const openMatch = openPattern.exec(html);
 
-  return html.replace(pattern, (match, openTag, tagName, inner, closeTag) => {
-    return `${openTag}${content}${closeTag}`;
-  });
+  if (!openMatch) {
+    return html;
+  }
+
+  const tagName = openMatch[1];
+  const openTag = openMatch[0];
+  const openIndex = openMatch.index;
+  const innerStart = openIndex + openTag.length;
+  const tagPattern = new RegExp(`<\\/?${tagName}\\b[^>]*>`, "gi");
+  tagPattern.lastIndex = innerStart;
+
+  let depth = 1;
+  let closingStart = -1;
+  let closingEnd = -1;
+  let tagMatch;
+
+  while ((tagMatch = tagPattern.exec(html))) {
+    const tag = tagMatch[0];
+    const isClosing = /^<\//.test(tag);
+    const isSelfClosing = /\/>$/.test(tag);
+
+    if (isClosing) {
+      depth -= 1;
+      if (depth === 0) {
+        closingStart = tagMatch.index;
+        closingEnd = tagPattern.lastIndex;
+        break;
+      }
+    } else if (!isSelfClosing) {
+      depth += 1;
+    }
+  }
+
+  if (closingStart === -1) {
+    return html;
+  }
+
+  return `${html.slice(0, innerStart)}${content}${html.slice(closingStart, html.length)}`;
 };
 
 const replaceTagContent = (html, tagName, content) => {
@@ -113,13 +160,15 @@ const replaceTagContent = (html, tagName, content) => {
 };
 
 const replaceAttributeById = (html, id, attribute, value) => {
-  const pattern = new RegExp(
-    `(<[^>]*id=["']${escapeRegex(id)}["'][^>]*\\s${attribute}=["'])([^"']*)(["'][^>]*>)`,
-    "i"
-  );
+  const pattern = new RegExp(`(<[^>]*id=["']${escapeRegex(id)}["'][^>]*>)`, "i");
 
-  return html.replace(pattern, (match, start, current, end) => {
-    return `${start}${value}${end}`;
+  return html.replace(pattern, (match) => {
+    const attributePattern = new RegExp(`(${attribute}=["'])([^"']*)(["'])`, "i");
+    if (attributePattern.test(match)) {
+      return match.replace(attributePattern, `$1${value}$3`);
+    }
+
+    return match.replace(/>$/, ` ${attribute}="${value}">`);
   });
 };
 
@@ -275,6 +324,215 @@ const renderAdvDassWebsite = (templateHtml, payload) => {
   }
 
   return html;
+};
+
+const buildChildServicesMarkup = (services = []) => {
+  const safeServices = Array.isArray(services) ? services : [];
+  return safeServices
+    .map((service) => {
+      return `
+        <div class="service-card">
+          <h3>${escapeHtml(service.name || "Service")}</h3>
+          <p>${escapeHtml(service.description || "")}</p>
+          <span class="service-link">${escapeHtml(service.tag || "Learn more")}</span>
+        </div>`;
+    })
+    .join("");
+};
+
+const buildChildTestimonialsMarkup = (testimonials = []) => {
+  const safeTestimonials = Array.isArray(testimonials) ? testimonials : [];
+  const slides = safeTestimonials
+    .map((item, index) => {
+      const initials = String(item.clientName || "PR")
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]?.toUpperCase() || "")
+        .join("") || "PR";
+
+      return `
+        <div class="testi-slide">
+          <div class="testi-card">
+            <div class="testi-quote">"</div>
+            <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testi-text">${escapeHtml(item.feedback || "")}</p>
+            <div class="testi-author">
+              <div class="author-avatar av-${(index % 3) + 1}">${escapeHtml(initials)}</div>
+              <div>
+                <div class="author-name">${escapeHtml(item.clientName || "Parent review")}</div>
+                <div class="author-rel">Parent review</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    })
+    .join("");
+
+  const dots = safeTestimonials
+    .map((item, index) => {
+      return `<button class="testi-dot${index === 0 ? " is-active" : ""}" type="button" aria-label="Show review ${index + 1}"></button>`;
+    })
+    .join("");
+
+  return `
+    <div class="testi-grid" id="liveTestimonialsGrid">${slides}</div>
+    <div class="testi-controls">
+      <button class="testi-btn testi-prev" type="button" aria-label="Previous review">&lsaquo;</button>
+      <div class="testi-dots" aria-label="Review navigation">${dots}</div>
+      <button class="testi-btn testi-next" type="button" aria-label="Next review">&rsaquo;</button>
+    </div>`;
+};
+
+const buildChildFaqMarkup = (faqs = []) => {
+  const safeFaqs = Array.isArray(faqs) ? faqs : [];
+  return safeFaqs
+    .map((item, index) => {
+      return `
+        <div class="why-card">
+          <div class="why-icon">${String(index + 1).padStart(2, "0")}</div>
+          <div>
+            <h4>${escapeHtml(item.question || "")}</h4>
+            <p>${escapeHtml(item.answer || "")}</p>
+          </div>
+        </div>`;
+    })
+    .join("");
+};
+
+const buildChildHoursMarkup = (officeHours = "") => {
+  const rows = String(officeHours || "")
+    .split(/\r?\n|\|/)
+    .map((row) => row.trim())
+    .filter(Boolean)
+    .map((row) => {
+      const separatorIndex = row.indexOf(":");
+      const left = separatorIndex >= 0 ? row.slice(0, separatorIndex).trim() : "Hours";
+      const right = separatorIndex >= 0 ? row.slice(separatorIndex + 1).trim() : row;
+      const closedClass = /closed/i.test(right) ? ' class="closed"' : "";
+      return `<tr><td>${escapeHtml(left)}</td><td${closedClass}>${escapeHtml(right)}</td></tr>`;
+    })
+    .join("");
+
+  return `<table class="timing-table">${rows}</table>`;
+};
+
+const renderChildCareWebsite = (templateHtml, payload) => {
+  const websiteDetails = payload.websiteDetails || {};
+  const contact = payload.contact || {};
+  const clinicName = escapeHtml(websiteDetails.professionalName || "Little Care Child Clinic");
+  const doctorLine = escapeHtml(
+    websiteDetails.professionalTitle || "Dr. Aarav Sharma | Pediatrician, Jaipur"
+  );
+  const rawDoctorLine = String(
+    websiteDetails.professionalTitle || "Dr. Aarav Sharma | Pediatrician, Jaipur"
+  );
+  const doctorName = rawDoctorLine.split("|")[0].trim() || rawDoctorLine.trim() || "Dr. Aarav Sharma";
+  const heroHeadline = escapeHtml(
+    websiteDetails.heroHeadline || "Expert care for every little one you love"
+  );
+  const heroDescription = escapeHtml(websiteDetails.heroDescription || "");
+  const yearsExperience = escapeHtml(websiteDetails.yearsExperience || "10+");
+  const aboutSection = escapeHtml(websiteDetails.aboutSection || "");
+  const primaryCtaLabel = escapeHtml(websiteDetails.primaryCtaLabel || "Book appointment");
+  const doctorPhoto = String(
+    websiteDetails.advocatePhoto ||
+    "https://images.pexels.com/photos/5998446/pexels-photo-5998446.jpeg?auto=compress&cs=tinysrgb&w=900"
+  ).trim();
+  const phone = escapeHtml(contact.primaryPhone || "");
+  const whatsapp = escapeHtml(contact.whatsappNumber || "");
+  const email = escapeHtml(contact.email || "");
+  const address = escapeHtml(contact.officeAddress || "").replace(/\r?\n/g, "<br>");
+  const plainAddress = escapeHtml(contact.officeAddress || "");
+  const mapLink = String(
+    contact.googleMapLink ||
+    "https://maps.google.com/maps?q=Jaipur&z=12&output=embed"
+  ).trim();
+  const consultationCopy = escapeHtml(contact.consultationCopy || "");
+  const hoursMarkup = buildChildHoursMarkup(contact.officeHours || "");
+  const footerHours = escapeHtml(contact.officeHours || "").replace(/\s*\|\s*/g, "<br>");
+  const whatsappDigits = String(contact.whatsappNumber || "").replace(/[^\d]/g, "");
+  const phoneDigits = String(contact.primaryPhone || "").replace(/[^\d+]/g, "");
+  const whatsappHref = whatsappDigits
+    ? `https://wa.me/${whatsappDigits}?text=Hello%20Doctor%2C%20I%20would%20like%20to%20book%20an%20appointment.`
+    : "#";
+  const callHref = phoneDigits ? `tel:${phoneDigits}` : "#";
+
+  let html = templateHtml;
+  html = replaceTagContent(html, "title", `${clinicName} | ${doctorLine}`);
+  html = html.replace(
+    /(<meta\s+name=["']description["']\s+content=["'])([^"']*)(["'][^>]*>)/i,
+    `$1${escapeHtml(
+      `Book trusted pediatric care with ${doctorName} at ${clinicName}.`
+    )}$3`
+  );
+  html = replaceElementContentById(html, "liveClinicName", clinicName);
+  html = replaceElementContentById(html, "liveClinicSubtitle", doctorLine);
+  html = replaceElementContentById(html, "liveFooterClinicName", clinicName);
+  html = replaceElementContentById(html, "liveFooterClinicSubtitle", doctorLine);
+  html = replaceElementContentById(html, "liveHeroHeadline", heroHeadline);
+  html = replaceElementContentById(html, "liveHeroDescription", heroDescription);
+  html = replaceElementContentById(html, "liveYearsExperience", yearsExperience);
+  html = replaceElementContentById(html, "liveDoctorYearsBadge", yearsExperience);
+  html = replaceElementContentById(
+    html,
+    "liveDoctorHeading",
+    escapeHtml(`Meet ${doctorName}, a pediatrician who truly listens`)
+  );
+  html = replaceElementContentById(
+    html,
+    "liveDoctorIntro",
+    escapeHtml(
+      `With over ${String(websiteDetails.yearsExperience || "10+").trim()} years of dedicated pediatric practice, ${doctorName} has become a trusted choice for families looking for calm, child-first care.`
+    )
+  );
+  html = replaceElementContentById(
+    html,
+    "liveDoctorQuote",
+    consultationCopy
+      ? `"${consultationCopy}"`
+      : '"Every child is unique. My goal is to provide personalized care that supports lifelong health and wellbeing."'
+  );
+  html = replaceElementContentById(html, "liveDoctorBio", aboutSection);
+  html = replaceElementContentById(html, "livePrimaryCta", primaryCtaLabel);
+  html = replaceElementContentById(html, "liveEmergencyPhoneLabel", phone);
+  html = replaceElementContentById(html, "liveClinicAddress", address);
+  html = replaceElementContentById(html, "liveClinicPhone", phone);
+  html = replaceElementContentById(html, "liveClinicWhatsapp", whatsapp);
+  html = replaceElementContentById(html, "liveClinicEmail", email);
+  html = replaceElementContentById(html, "liveEmergencyCopy", consultationCopy || `Call ${phone} for urgent child-health guidance or same-day appointment support.`);
+  html = replaceElementContentById(html, "liveClinicMapFallback", plainAddress);
+  html = replaceElementContentById(html, "liveClinicHours", hoursMarkup);
+  html = replaceElementContentById(html, "liveFooterAbout", aboutSection || heroDescription);
+  html = replaceElementContentById(html, "liveFooterAddress", address);
+  html = replaceElementContentById(html, "liveFooterPhone", phone);
+  html = replaceElementContentById(html, "liveFooterHours", footerHours);
+  html = replaceElementContentById(html, "liveFooterEmail", email);
+  html = replaceElementContentById(html, "liveServicesGrid", buildChildServicesMarkup(payload.services || []));
+  html = replaceElementContentById(html, "liveTestimonialsCarousel", buildChildTestimonialsMarkup(payload.testimonials || []));
+  html = replaceElementContentById(html, "liveFaqList", buildChildFaqMarkup(payload.faqs || []));
+  html = replaceAttributeById(html, "liveDoctorPhoto", "src", doctorPhoto);
+  html = replaceAttributeById(html, "liveDoctorPhoto", "alt", `${doctorName} portrait`);
+  html = replaceAttributeById(html, "liveClinicMap", "src", mapLink);
+  html = replaceAttributeById(html, "liveEmergencyPhoneLink", "href", callHref);
+  html = replaceAttributeById(html, "liveCallCta", "href", callHref);
+  html = replaceAttributeById(html, "liveAppointmentCall", "href", callHref);
+  html = replaceAttributeById(html, "liveAppointmentWhatsapp", "href", whatsappHref);
+  html = replaceElementContentById(html, "liveAppointmentCall", `Call: ${phone}`);
+
+  return html;
+};
+
+const renderTemplateHtml = (templateId, templateHtml, payload) => {
+  if (templateId === "adv-dass-legal") {
+    return renderAdvDassWebsite(templateHtml, payload);
+  }
+
+  if (templateId === "little-care-child") {
+    return renderChildCareWebsite(templateHtml, payload);
+  }
+
+  return templateHtml;
 };
 
 const pickFields = (data, fields) => {
@@ -453,6 +711,112 @@ const putGithubFile = async ({ repoPath, message, content, sha = "" }) => {
   }
 
   return response.json();
+};
+
+const putGithubFileBase64 = async ({ repoPath, message, contentBase64, sha = "" }) => {
+  if (!env.githubToken) {
+    throw new Error("GitHub token is not configured on the server yet");
+  }
+
+  const apiUrl = `https://api.github.com/repos/${env.githubRepoOwner}/${env.githubRepoName}/contents/${repoPath}`;
+  const response = await fetch(apiUrl, {
+    method: "PUT",
+    headers: {
+      Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${env.githubToken}`,
+      "Content-Type": "application/json",
+      "User-Agent": "pagefolio-asset-uploader"
+    },
+    body: JSON.stringify({
+      message,
+      content: contentBase64,
+      branch: env.githubRepoBranch,
+      ...(sha ? { sha } : {})
+    })
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || "Could not upload the website asset");
+  }
+
+  return response.json();
+};
+
+const getImageExtension = (fileName = "", mimeType = "") => {
+  const normalizedName = String(fileName || "").toLowerCase();
+  const extensionMatch = normalizedName.match(/\.([a-z0-9]+)$/);
+  const extension = extensionMatch ? extensionMatch[1] : "";
+
+  if (["jpg", "jpeg", "png", "webp", "gif"].includes(extension)) {
+    return extension === "jpeg" ? "jpg" : extension;
+  }
+
+  if (mimeType.includes("png")) return "png";
+  if (mimeType.includes("webp")) return "webp";
+  if (mimeType.includes("gif")) return "gif";
+  return "jpg";
+};
+
+const uploadWebsiteAsset = async (req, res, next) => {
+  try {
+    const preferredLink = slugifyUsername(req.body.username || "");
+    const fileName = String(req.body.fileName || "advocate-photo").trim();
+    const dataUrl = String(req.body.dataUrl || "").trim();
+
+    if (!preferredLink) {
+      return res.status(400).json(
+        apiResponse({
+          success: false,
+          message: "Website username is required"
+        })
+      );
+    }
+
+    const match = dataUrl.match(/^data:(image\/(?:png|jpe?g|webp|gif));base64,([A-Za-z0-9+/=]+)$/i);
+    if (!match) {
+      return res.status(400).json(
+        apiResponse({
+          success: false,
+          message: "Please upload a valid image file"
+        })
+      );
+    }
+
+    const mimeType = match[1].toLowerCase();
+    const contentBase64 = match[2];
+    const byteSize = Buffer.byteLength(contentBase64, "base64");
+
+    if (byteSize > 4 * 1024 * 1024) {
+      return res.status(400).json(
+        apiResponse({
+          success: false,
+          message: "Image must be 4MB or smaller"
+        })
+      );
+    }
+
+    const extension = getImageExtension(fileName, mimeType);
+    const repoPath = `${preferredLink}/assets/advocate-photo-${Date.now()}.${extension}`;
+
+    await putGithubFileBase64({
+      repoPath,
+      message: `Upload advocate photo for ${preferredLink}`,
+      contentBase64
+    });
+
+    res.status(200).json(
+      apiResponse({
+        message: "Photo uploaded successfully",
+        data: {
+          repoPath,
+          assetUrl: `${String(env.publicSiteBase || "").replace(/\/+$/, "")}/${repoPath}`
+        }
+      })
+    );
+  } catch (error) {
+    next(error);
+  }
 };
 
 const findUserByUsername = async (username) => {
@@ -821,7 +1185,7 @@ const saveWebsiteContent = async (req, res, next) => {
     }
 
     const templateHtml = await fs.readFile(templateDefinition.sourcePath, "utf8");
-    const renderedHtml = renderAdvDassWebsite(templateHtml, req.body);
+    const renderedHtml = renderTemplateHtml(templateId, templateHtml, req.body);
     const repoPath = `${preferredLink}/index.html`;
     const currentFile = await getGithubFile(repoPath);
 
@@ -864,5 +1228,6 @@ module.exports = {
   checkUsernameAvailability,
   createProfileFolder,
   publishTemplateToProfile,
+  uploadWebsiteAsset,
   saveWebsiteContent
 };

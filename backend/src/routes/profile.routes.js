@@ -5,6 +5,7 @@ const {
   checkUsernameAvailability,
   createProfileFolder,
   publishTemplateToProfile,
+  uploadWebsiteAsset,
   saveWebsiteContent
 } = require("../controllers/profile.controller");
 const authMiddleware = require("../middleware/auth.middleware");
@@ -14,6 +15,7 @@ const router = express.Router();
 router.get("/check-username/:username", checkUsernameAvailability);
 router.post("/create-folder", authMiddleware, createProfileFolder);
 router.post("/publish-template", authMiddleware, publishTemplateToProfile);
+router.post("/upload-website-asset", uploadWebsiteAsset);
 router.post("/save-website-content", saveWebsiteContent);
 router.get("/:username", getPublicProfile);
 router.post("/", authMiddleware, upsertProfile);
